@@ -1,5 +1,12 @@
 # @jpbnetley/test-changesets
 
+## 0.0.7
+
+### Patch Changes
+
+- 4d06c07: test auto commit
+- 7eb1898: improved error text
+
 ## 0.0.6
 
 ### Patch Changes
