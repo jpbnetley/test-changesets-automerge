@@ -1,12 +1,15 @@
 {
   "name": "@jpbnetley/test-changesets",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "test changesets for version management",
   "main": "dist/index.js",
   "files": [
     "dist"
   ],
   "type": "module",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+},
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
