@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets
 
+## 0.0.5
+
+### Patch Changes
+
+- 806821c: rm contents:write perm
+
 ## 0.0.4
 
 ### Patch Changes
