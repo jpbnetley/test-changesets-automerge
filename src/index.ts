@@ -1,3 +1,3 @@
 console.log('I am running')
 console.warn('warn')
-console.error('coool')
+console.error('this is an error')
