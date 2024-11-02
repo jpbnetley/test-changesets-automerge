@@ -1,5 +1,6 @@
 # test-changesets
-test changesets for version management
+> test changesets for version management
+> src: https://github.com/changesets/changesets
 
 ## Lessons learned
 - When creating the project for the first time, set the version in package.json to 0.0.0.
