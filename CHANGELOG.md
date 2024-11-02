@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets
 
+## 0.0.6
+
+### Patch Changes
+
+- 1c4111b: gh perm required is contents write
+
 ## 0.0.5
 
 ### Patch Changes
