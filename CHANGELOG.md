@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets
 
+## 0.0.4
+
+### Patch Changes
+
+- d370497: perm rm attestations id-token
+
 ## 0.0.3
 
 ### Patch Changes
