@@ -1,6 +1,6 @@
 {
   "name": "@jpbnetley/test-changesets",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "test changesets for version management",
   "main": "dist/index.js",
   "files": [
