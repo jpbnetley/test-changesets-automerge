@@ -1,5 +1,12 @@
 # @jpbnetley/test-changesets
 
+## 0.0.9
+
+### Patch Changes
+
+- 3c1650d: added another console error log
+- 66442e3: rm console error
+
 ## 0.0.8
 
 ### Patch Changes
