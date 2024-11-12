@@ -1,5 +1,12 @@
 # @jpbnetley/test-changesets
 
+## 0.0.8
+
+### Patch Changes
+
+- c66bb01: added comment
+- 1849a48: another comment
+
 ## 0.0.7
 
 ### Patch Changes
