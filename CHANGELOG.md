@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets
 
+## 0.0.10
+
+### Patch Changes
+
+- 5be3c66: updated deps
+
 ## 0.0.9
 
 ### Patch Changes
