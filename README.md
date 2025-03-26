@@ -12,3 +12,6 @@ packages: write
 ```
 - The github action also requires the permission to create pull requests 
 project settings -> actions -> General -> Workflow permissions -> Choose whether GitHub Actions can create pull requests or submit approving pull request reviews.
+
+## Adding a changeset
+`npx changeset`
