@@ -33,3 +33,7 @@ project settings -> actions -> General -> Workflow permissions -> Choose whether
           PR_NUM: ${{ steps.changesets.outputs.pullRequestNumber }}
           REPO: ${{ github.repository }}
 ```
+
+For auto merge to be available, branch protection rules need to be set with at least 1 required status check, as explained [here](https://github.com/orgs/community/discussions/53088#discussioncomment-5992953)
+
+When a job gets created with the `GITHUB_TOKEN`, the `on:pull_request` will not get triggered, as explained [here](https://github.com/orgs/community/discussions/65321#discussioncomment-6861423)
