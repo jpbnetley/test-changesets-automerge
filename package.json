@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "version":"changeset version",
+    "version":"pnpm changeset",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc:check": "tsc --noEmit"
   },
