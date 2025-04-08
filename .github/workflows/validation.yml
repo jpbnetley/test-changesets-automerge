@@ -12,7 +12,7 @@ env:
 
 jobs:
   validation:
-    name: Release
+    name: Validation
     runs-on: ubuntu-latest
 
     steps:
