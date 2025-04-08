@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+env: 
+  node_version: 22
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{env.node_version}}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{env.node_version}}
+          registry-url: 'https://npm.pkg.github.com'
+
+      - uses: pnpm/action-setup@v4
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Check types
+        run: pnpm run tsc:check
+

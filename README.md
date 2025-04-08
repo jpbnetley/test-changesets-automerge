@@ -18,3 +18,18 @@ project settings -> actions -> General -> Workflow permissions -> Choose whether
 
 ## Adding a changeset
 `npx changeset`
+
+## Enable automerge
+[src](https://github.com/changesets/action/issues/310#issuecomment-2770423999)
+- enable automerge for the repo in settings.
+- update the github action to toggle the auto merge when checks complete
+
+```yml
+- name: Enable auto-merge for Changesets PRs
+        if: steps.changesets.outputs.hasChangesets
+        run: gh pr --repo "$REPO" merge --auto --merge "$PR_NUM"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUM: ${{ steps.changesets.outputs.pullRequestNumber }}
+          REPO: ${{ github.repository }}
+```
