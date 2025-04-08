@@ -11,7 +11,7 @@ env:
   node_version: 22
 
 jobs:
-  release:
+  validation:
     name: Release
     runs-on: ubuntu-latest
 
