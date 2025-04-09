@@ -16,7 +16,6 @@
     "version:bump": "changeset version",
     "version:hasChanges": "changeset status",
     "ci:publish": "changeset publish",
-    "ci:git:tag": "git push --follow-tags",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc:check": "tsc --noEmit"
   },
