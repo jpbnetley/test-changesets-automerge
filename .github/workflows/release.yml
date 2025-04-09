@@ -59,6 +59,8 @@ jobs:
           pnpm run version:bump
           git add . && git commit -am "chore: update version"
           pnpm ci:publish
+          git add . && git commit -am "release: release package"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}

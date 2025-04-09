@@ -1,6 +1,6 @@
 {
   "name": "@jpbnetley/test-changesets-automerge",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "test changesets for version management",
   "main": "dist/index.js",
   "files": [

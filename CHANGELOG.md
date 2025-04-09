@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.9
+
+### Patch Changes
+
+- 4dc8b96: update after commit
+
 ## 0.0.8
 
 ### Patch Changes
