@@ -15,7 +15,7 @@
     "version": "changeset",
     "version:bump": "changeset version",
     "version:hasChanges": "changeset status",
-    "ci:publish": "changeset publish",
+    "ci:publish": "changeset version && changeset publish",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc:check": "tsc --noEmit"
   },
