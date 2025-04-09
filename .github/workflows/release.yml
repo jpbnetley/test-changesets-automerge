@@ -38,7 +38,7 @@ jobs:
       - name: Check for changesets
         id: changesets
         run: |
-          if pnpm run ci:version:hasChanges; then
+          if pnpm run version:hasChanges; then
             echo "new changesets found."
             echo "hasChanges=true" >> $GITHUB_OUTPUT
           else
