@@ -55,7 +55,10 @@ jobs:
 
       - name: Publish to GitHub Packages
         if: steps.changesets.outputs.hasChanges == 'true'
-        run: pnpm ci:publish
+        run: |
+          pnpm run version:bump
+          git add . && git commit -am "chore: update version"
+          pnpm ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
