@@ -50,6 +50,10 @@ jobs:
         if: steps.changesets.outputs.hasChanges == 'true'
         run: pnpm build
 
+      - name: Update Version
+        if: steps.changesets.outputs.hasChanges == 'true'
+        run: pnpm version:bump
+
       - name: Publish to GitHub Packages
         if: steps.changesets.outputs.hasChanges == 'true'
         run: pnpm ci:publish
