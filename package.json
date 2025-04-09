@@ -1,6 +1,6 @@
 {
   "name": "@jpbnetley/test-changesets-automerge",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "test changesets for version management",
   "main": "dist/index.js",
   "files": [
@@ -12,9 +12,10 @@
   },
   "scripts": {
     "build": "tsc",
-    "version": "pnpm changeset",
-    "ci:hasChanges":"pnpm changeset status --since=main",
-    "ci:publish": "pnpm run build && pnpm changeset publish",
+    "version": "changeset",
+    "version:bump": "changeset version",
+    "version:hasChanges": "changeset status --since=main",
+    "ci:publish": "changeset publish",
     "ci:git:tag": "git push --follow-tags",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc:check": "tsc --noEmit"
