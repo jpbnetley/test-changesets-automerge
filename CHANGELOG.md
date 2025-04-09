@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.11
+
+### Patch Changes
+
+- 36fd435: minor bump
+
 ## 0.0.9
 
 ### Patch Changes
