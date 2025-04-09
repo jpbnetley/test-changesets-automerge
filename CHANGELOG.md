@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.7
+
+### Patch Changes
+
+- 93468c0: update minor version
+
 ## 0.0.2
 
 ### Patch Changes
