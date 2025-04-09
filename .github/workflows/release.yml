@@ -24,6 +24,11 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
+      - name: Setup Git user identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Setup Node.js ${{env.node_version}}
         uses: actions/setup-node@v4
         with:
@@ -31,6 +36,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
 
       - uses: pnpm/action-setup@v4
+      
 
       - name: Install Dependencies
         run: pnpm i
@@ -38,7 +44,6 @@ jobs:
       - name: Check for changesets
         id: changesets
         run: |
-          
           if pnpm run version:hasChanges; then
             echo "new changesets found."
             echo "hasChanges=true" >> $GITHUB_OUTPUT
