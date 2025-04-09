@@ -59,16 +59,9 @@ jobs:
           pnpm run version:bump
           git add . && git commit -am "chore: update version"
           pnpm ci:publish
-          git add . && git commit -am "release: release package"
-          git push
+          git push --follow-tags
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push git Tag
-        if: steps.changesets.outputs.hasChanges == 'true'
-        run: git push --follow-tags
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
