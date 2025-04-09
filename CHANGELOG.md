@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.7
+
+### Patch Changes
+
+- 3ad8378: create a new version to check tag
+
 ## 0.0.2
 
 ### Patch Changes
