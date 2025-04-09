@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.8
+
+### Patch Changes
+
+- 96df249: update patch
+
 ## 0.0.7
 
 ### Patch Changes
