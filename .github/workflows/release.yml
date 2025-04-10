@@ -24,9 +24,6 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - run: git config user.name "github-actions[bot]"
-      - run: git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
       - name: Setup Node.js ${{ env.node_version }}
         uses: actions/setup-node@v4
         with:
@@ -53,11 +50,17 @@ jobs:
         if: steps.changesets.outputs.hasChanges == 'true'
         run: pnpm build
 
+      - name: Setup git user info
+        run: | 
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"   
+
       - name: Publish to GitHub Packages
         if: steps.changesets.outputs.hasChanges == 'true'
         run: |
           pnpm run version:bump
-          git add . && git commit -am "chore: update version"
+          git add . 
+          git commit -am "chore: update version"
           pnpm ci:publish
           git push --follow-tags
         env:
