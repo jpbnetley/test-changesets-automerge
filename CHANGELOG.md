@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.17
+
+### Patch Changes
+
+- 43e94a2: get latest tag
+
 ## 0.0.16
 
 ### Patch Changes
