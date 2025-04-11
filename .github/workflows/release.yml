@@ -98,6 +98,7 @@ jobs:
             tag: ${{ steps.tag.outputs.latest_tag }}
           run: |
             echo "tag is ${{ steps.tag.outputs.latest_tag }}"
+            echo "int tag $tag"
             gh release create ${{ steps.tag.outputs.latest_tag }} \
                 --repo="$GITHUB_REPOSITORY" \
                 --title="Release for ${{ steps.tag.outputs.latest_tag }}" \
