@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.16
+
+### Patch Changes
+
+- 2167d5a: add perm to release notes
+
 ## 0.0.15
 
 ### Patch Changes
