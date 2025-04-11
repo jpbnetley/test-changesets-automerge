@@ -76,18 +76,26 @@ jobs:
       name: Release Notes
       needs: release
       runs-on: ubuntu-latest
+      if: needs.release.outputs.hasChanges == 'true'
 
       permissions:
         contents: write
 
       steps:
+        
+        - name: Get latest tag
+          id: latest_tag
+          run: |
+            git fetch --tags
+            latest_tag=$(git describe --tags --abbrev=0)
+            echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
+
         - name: Create release
-          if: needs.release.outputs.hasChanges == 'true'
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             tag: ${{ github.ref_name }}
           run: |
-            gh release create "$tag" \
+            gh release create "${{ steps.latest_tag.outputs.latest_tag }}" \
                 --repo="$GITHUB_REPOSITORY" \
-                --title="${tag#v}" \
+                --title="${{ steps.latest_tag.outputs.latest_tag }}" \
                 --generate-notes
