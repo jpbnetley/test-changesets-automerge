@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.19
+
+### Patch Changes
+
+- 37d1a7b: make releasenotes job repo
+
 ## 0.0.18
 
 ### Patch Changes
