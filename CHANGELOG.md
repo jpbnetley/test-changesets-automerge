@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.24
+
+### Patch Changes
+
+- 720d38e: rm perm for release
+
 ## 0.0.23
 
 ### Patch Changes
