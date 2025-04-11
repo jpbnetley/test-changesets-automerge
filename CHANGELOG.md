@@ -1,5 +1,12 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.14
+
+### Patch Changes
+
+- e0b33f8: updated readme
+- c69fd64: add prev version
+
 ## 0.0.13
 
 ### Patch Changes
