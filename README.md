@@ -66,17 +66,18 @@ But this is not working as expected, as detailed [here](https://github.com/chang
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Check for changesets # currently doesn't work correctly, see https://github.com/changesets/changesets/issues/1036
+      - name: Check for changesets
         id: changesets
+        # currently doesn't work correctly, see https://github.com/changesets/changesets/issues/1036
+        # old check: pnpm run version:hasChanges
         run: |
-          if pnpm run version:hasChanges; then
-            echo "new changesets found."
-            echo "hasChanges=true" >> $GITHUB_OUTPUT
-          else
-            echo "No changesets has been found."
+          if [ $(ls .changeset/*.md | wc -l) -eq 1 ]; then
+            echo "No changesets found."
             echo "hasChanges=false" >> $GITHUB_OUTPUT
+          else
+            echo "New changesets has been found."
+            echo "hasChanges=true" >> $GITHUB_OUTPUT
           fi
-
       - name: Build
         if: steps.changesets.outputs.hasChanges == 'true'
         run: pnpm build
