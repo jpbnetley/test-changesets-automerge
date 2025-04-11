@@ -21,6 +21,9 @@ jobs:
       pull-requests: write
       packages: write
 
+    outputs:
+      hasChanges: ${{ steps.changesets.outputs.hasChanges }}
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -69,3 +72,18 @@ jobs:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  release-notes:
+      name: Release Notes
+      needs: release
+      runs-on: ubuntu-latest
+      steps:
+        - name: Create release
+          if: needs.release.outputs.hasChanges == 'true'
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            tag: ${{ github.ref_name }}
+          run: |
+            gh release create "$tag" \
+                --repo="$GITHUB_REPOSITORY" \
+                --title="${tag#v}" \
+                --generate-notes
