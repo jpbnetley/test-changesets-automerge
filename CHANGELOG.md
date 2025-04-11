@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.15
+
+### Patch Changes
+
+- e061502: create gh release when tag completes
+
 ## 0.0.14
 
 ### Patch Changes
