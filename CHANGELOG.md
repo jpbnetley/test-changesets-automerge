@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.23
+
+### Patch Changes
+
+- 8713c28: git tag for release notes
+
 ## 0.0.22
 
 ### Patch Changes
