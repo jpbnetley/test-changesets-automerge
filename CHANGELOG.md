@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.25
+
+### Patch Changes
+
+- dbf2c81: improve readme docs
+
 ## 0.0.24
 
 ### Patch Changes
