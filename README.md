@@ -52,45 +52,63 @@ The step `Check for changesets` uses changesets `changeset status`.
 But this is not working as expected, as detailed [here](https://github.com/changesets/changesets/issues/1036) with a pr to fix it [here](https://github.com/changesets/changesets/pull/1345).
 
 ```yml
-  - run: git config user.name "github-actions[bot]"
-  - run: git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+  jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
 
-  - name: Setup Node.js ${{ env.node_version }}
-    uses: actions/setup-node@v4
-    with:
-      node-version: ${{ env.node_version }}
-      registry-url: 'https://npm.pkg.github.com'
+    permissions:
+      contents: write
+      packages: write
 
-  - uses: pnpm/action-setup@v4
+    outputs:
+      hasChanges: ${{ steps.changesets.outputs.hasChanges }}
 
-  - name: Install Dependencies
-    run: pnpm i
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
 
-  - name: Check for changesets
-    id: changesets
-    # currently doesn't work correctly, see https://github.com/changesets/changesets/issues/1036
-    # old check: pnpm run version:hasChanges
-    run: |
-      if [ $(ls .changeset/*.md | wc -l) -eq 1 ]; then
-        echo "No changesets found."
-        echo "hasChanges=false" >> $GITHUB_OUTPUT
-      else
-        echo "New changesets has been found."
-        echo "hasChanges=true" >> $GITHUB_OUTPUT
-      fi
-  - name: Build
-    if: steps.changesets.outputs.hasChanges == 'true'
-    run: pnpm build
+      - name: Check for changesets
+        id: changesets
+        # currently doesn't work correctly, see https://github.com/changesets/changesets/issues/1036
+        # old check: pnpm run version:hasChanges
+        run: |
+          if [ $(ls .changeset/*.md | wc -l) -eq 1 ]; then
+            echo "No changesets found."
+            echo "hasChanges=false" >> $GITHUB_OUTPUT
+          else
+            echo "New changesets has been found."
+            echo "hasChanges=true" >> $GITHUB_OUTPUT
+          fi
 
-  - name: Publish to GitHub Packages
-    if: steps.changesets.outputs.hasChanges == 'true'
-    run: |
-      pnpm run version:bump
-      git add . && git commit -am "chore: update version"
-      pnpm ci:publish
-      git push --follow-tags
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Node.js ${{ env.node_version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.node_version }}
+          registry-url: 'https://npm.pkg.github.com'
+
+      - uses: pnpm/action-setup@v4
+      
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build
+        if: steps.changesets.outputs.hasChanges == 'true'
+        run: pnpm build
+
+      - name: Setup git user info
+        run: | 
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"   
+
+      - name: Publish to GitHub Packages
+        if: steps.changesets.outputs.hasChanges == 'true'
+        run: |
+          pnpm run version:bump
+          pnpm ci:publish
+          git push --follow-tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
