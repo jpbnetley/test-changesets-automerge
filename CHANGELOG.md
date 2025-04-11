@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.20
+
+### Patch Changes
+
+- 61a1f48: improve release notes generator'
+
 ## 0.0.19
 
 ### Patch Changes
