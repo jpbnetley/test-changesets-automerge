@@ -16,10 +16,9 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
 
-    # permissions:
-    #   contents: write
-    #   pull-requests: write
-    #   packages: write
+    permissions:
+      contents: write
+      packages: write
 
     outputs:
       hasChanges: ${{ steps.changesets.outputs.hasChanges }}
