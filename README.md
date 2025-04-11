@@ -1,4 +1,4 @@
-# test-changesets
+# test-changesets-automerge
 > test changesets for version management
 > src: https://github.com/changesets/changesets
 
@@ -19,10 +19,17 @@ project settings -> actions -> General -> Workflow permissions -> Choose whether
 ## Adding a changeset
 `npx changeset`
 
-## Enable automerge
+# Enable release on merge
+There here are some options:
+- Use the [changesets action](https://github.com/changesets/action) provided by changesets, and then set up automerge once the release should be merged.
+- Build a custom job
+- use auto-publish github [action](https://github.com/JamilOmar/autopublish-changesets-action)
+
+## Using the provided changesets action with automerge
 [src](https://github.com/changesets/action/issues/310#issuecomment-2770423999)
 - enable automerge for the repo in settings.
 - update the github action to toggle the auto merge when checks complete
+
 
 ```yml
 - name: Enable auto-merge for Changesets PRs
@@ -37,3 +44,52 @@ project settings -> actions -> General -> Workflow permissions -> Choose whether
 For auto merge to be available, branch protection rules need to be set with at least 1 required status check, as explained [here](https://github.com/orgs/community/discussions/53088#discussioncomment-5992953)
 
 When a job gets created with the `GITHUB_TOKEN`, the `on:pull_request` will not get triggered, as explained [here](https://github.com/orgs/community/discussions/65321#discussioncomment-6861423)
+
+## Using custom job
+> use a custom job to check if there are changesets, and if so, build and release the package.
+
+The step `Check for changesets` uses changesets `changeset status`.  
+But this is not working as expected, as detailed [here](https://github.com/changesets/changesets/issues/1036) with a pr to fix it [here](https://github.com/changesets/changesets/pull/1345).
+
+```yml
+ - run: git config user.name "github-actions[bot]"
+      - run: git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Setup Node.js ${{ env.node_version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.node_version }}
+          registry-url: 'https://npm.pkg.github.com'
+
+      - uses: pnpm/action-setup@v4
+      
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Check for changesets # currently doesn't work correctly, see https://github.com/changesets/changesets/issues/1036
+        id: changesets
+        run: |
+          if pnpm run version:hasChanges; then
+            echo "new changesets found."
+            echo "hasChanges=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changesets has been found."
+            echo "hasChanges=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build
+        if: steps.changesets.outputs.hasChanges == 'true'
+        run: pnpm build
+
+      - name: Publish to GitHub Packages
+        if: steps.changesets.outputs.hasChanges == 'true'
+        run: |
+          pnpm run version:bump
+          git add . && git commit -am "chore: update version"
+          pnpm ci:publish
+          git push --follow-tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
