@@ -76,6 +76,10 @@ jobs:
       name: Release Notes
       needs: release
       runs-on: ubuntu-latest
+
+      permissions:
+        contents: write
+
       steps:
         - name: Create release
           if: needs.release.outputs.hasChanges == 'true'
