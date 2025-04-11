@@ -1,5 +1,12 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.13
+
+### Patch Changes
+
+- 6a32880: final test for version
+  should work correctly now
+
 ## 0.0.12
 
 ### Patch Changes
