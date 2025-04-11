@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.22
+
+### Patch Changes
+
+- 349749d: log
+
 ## 0.0.21
 
 ### Patch Changes
