@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.18
+
+### Patch Changes
+
+- 93e43a4: release notes gen improvement
+
 ## 0.0.17
 
 ### Patch Changes
