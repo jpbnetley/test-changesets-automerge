@@ -21,9 +21,11 @@ project settings -> actions -> General -> Workflow permissions -> Choose whether
 
 # Enable release on merge
 There here are some options:
-- Use the [changesets action](https://github.com/changesets/action) provided by changesets, and then set up automerge once the release should be merged.
-- Build a custom job
-- use auto-publish github [action](https://github.com/JamilOmar/autopublish-changesets-action)
+[ ] Use the [changesets action](https://github.com/changesets/action) provided by changesets, and then set up automerge once the release should be merged.
+[ ] use auto-publish github [action](https://github.com/JamilOmar/autopublish-changesets-action)
+[X] Build a custom job
+
+This repo tried a few implantations to get auto release working, and ended up using the *`Build a custom job`* option.
 
 ## Using the provided changesets action with automerge
 [src](https://github.com/changesets/action/issues/310#issuecomment-2770423999)
