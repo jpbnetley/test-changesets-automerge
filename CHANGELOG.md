@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.21
+
+### Patch Changes
+
+- 5249fb0: fetch depth
+
 ## 0.0.20
 
 ### Patch Changes
