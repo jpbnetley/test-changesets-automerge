@@ -82,6 +82,11 @@ jobs:
         contents: write
 
       steps:
+        - name: Checkout Repo
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 1
+
         - name: Get latest tag
           id: latest_tag
           run: |
