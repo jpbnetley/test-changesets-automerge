@@ -36,7 +36,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Check for changesets
+      - name: Check for changesets # currently doesn't work correctly, see https://github.com/changesets/changesets/issues/1036
         id: changesets
         run: |
           if pnpm run version:hasChanges; then
