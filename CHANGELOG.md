@@ -1,5 +1,13 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.12
+
+### Patch Changes
+
+- c10b9c1: check if there are changesets should be fixed now
+- c10b9c1: check if there are changesets should be fixed now
+- d2947df: update ci version
+
 ## 0.0.11
 
 ### Patch Changes
