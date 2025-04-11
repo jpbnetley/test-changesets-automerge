@@ -62,8 +62,6 @@ jobs:
         if: steps.changesets.outputs.hasChanges == 'true'
         run: |
           pnpm run version:bump
-          git add . 
-          git commit -am "chore: update version"
           pnpm ci:publish
           git push --follow-tags
         env:
