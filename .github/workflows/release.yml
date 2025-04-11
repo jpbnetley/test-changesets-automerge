@@ -82,20 +82,18 @@ jobs:
         contents: write
 
       steps:
-        
         - name: Get latest tag
           id: latest_tag
           run: |
             git fetch --tags
-            latest_tag=$(git describe --tags --abbrev=0)
-            echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
+            echo "latest_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
 
         - name: Create release
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            tag: ${{ github.ref_name }}
+            tag: ${{ steps.latest_tag.outputs.latest_tag }}
           run: |
             gh release create "${{ steps.latest_tag.outputs.latest_tag }}" \
                 --repo="$GITHUB_REPOSITORY" \
-                --title="${{ steps.latest_tag.outputs.latest_tag }}" \
+                --title="Release for ${{ steps.latest_tag.outputs.latest_tag }}" \
                 --generate-notes
