@@ -1,0 +1,48 @@
+name: Has changesets
+description: Check if there are changesets in the rep
+
+inputs:
+  GITHUB_TOKEN:
+    description: github token
+    required: true
+
+  has_changes: 
+    description: Is there changes present
+    required: true
+
+outputs:
+  # Map the action output(s) to step output(s)
+  has_changes:
+    description: 'If changesets has been found'
+    value: ${{ steps.changesets.outputs.has_changes }}
+
+runs:
+  using: 'composite'
+  steps:
+
+      - name: Create or Update Comment for changesets
+        shell: bash
+        run: |
+          COMMENT_BODY="No changesets found. To add a changeset, please run 'pnpm run version'"
+          if [ "${{ steps.changesets.outputs.has_changes }}" == "true" ]; then
+            COMMENT_BODY="Changesets have been found."
+          fi
+
+          # Fetch existing comments
+          COMMENTS=$(gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments)
+
+          # Check if a comment from the GitHub Actions bot already exists
+          COMMENT_ID=$(echo "$COMMENTS" | jq -r '.[] | select(.user.login=="github-actions[bot]") | .id')
+
+          if [ -z "$COMMENT_ID" ]; then
+            # Create a new comment
+            gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
+              -f body="$COMMENT_BODY"
+          else
+            # Update the existing comment
+            gh api repos/${{ github.repository }}/issues/comments/$COMMENT_ID \
+              -X PATCH \
+              -f body="$COMMENT_BODY"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}

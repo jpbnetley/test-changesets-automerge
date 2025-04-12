@@ -1,0 +1,24 @@
+name: Has changesets
+description: Check if there are changesets in the rep
+
+outputs:
+  # Map the action output(s) to step output(s)
+  has_changes:
+    description: 'If changesets has been found'
+    value: ${{ steps.changesets.outputs.has_changes }}
+
+runs:
+  using: 'composite'
+  steps:
+
+  - name: Check for changesets
+    id: changesets
+    shell: bash
+    run: |
+            if [ $(ls .changeset/*.md | wc -l) -eq 1 ]; then
+              echo "No changesets found."
+              echo "has_changes=false" >> $GITHUB_OUTPUT
+            else
+              echo "New changesets has been found."
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+            fi
