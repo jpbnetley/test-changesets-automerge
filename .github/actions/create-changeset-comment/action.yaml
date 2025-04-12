@@ -11,7 +11,6 @@ inputs:
     required: true
 
 outputs:
-  # Map the action output(s) to step output(s)
   has_changes:
     description: 'If changesets has been found'
     value: ${{ inputs.has_changes }}
@@ -23,9 +22,9 @@ runs:
       - name: Create or Update Comment for changesets
         shell: bash
         run: |
-          COMMENT_BODY="No changesets found. To add a changeset, please run 'pnpm run version'"
+          COMMENT_BODY="No changesets found. To add a changeset, please run 'pnpm run version' if you would like to add a changelog, and initiate a build."
           if [ "${{ inputs.has_changes }}" == "true" ]; then
-            COMMENT_BODY="Changesets have been found."
+            COMMENT_BODY="Changesets have been found. Thus a release will be queued once merged"
           fi
 
           # Fetch existing comments
