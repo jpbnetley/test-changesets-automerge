@@ -14,7 +14,7 @@ outputs:
   # Map the action output(s) to step output(s)
   has_changes:
     description: 'If changesets has been found'
-    value: ${{ steps.changesets.outputs.has_changes }}
+    value: ${{ inputs.has_changes }}
 
 runs:
   using: 'composite'
@@ -24,7 +24,7 @@ runs:
         shell: bash
         run: |
           COMMENT_BODY="No changesets found. To add a changeset, please run 'pnpm run version'"
-          if [ "${{ steps.changesets.outputs.has_changes }}" == "true" ]; then
+          if [ "${{ inputs.has_changes }}" == "true" ]; then
             COMMENT_BODY="Changesets have been found."
           fi
 

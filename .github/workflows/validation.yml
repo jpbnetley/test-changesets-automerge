@@ -52,4 +52,4 @@ jobs:
         uses: ./.github/actions/create-changeset-comment
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          has_changes: ${{ steps.changesets.outputs.has_changes}}
+          has_changes: ${{ steps.changesets.outputs.has_changes }}
