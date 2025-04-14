@@ -98,8 +98,16 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             tag: ${{ steps.tag.outputs.latest_tag }}
+            pre_release: ${{ inputs.pre_release }}
           run: |
-            gh release create $tag \
-                --repo="$GITHUB_REPOSITORY" \
-                --title="Release for $tag" \
-                --generate-notes
+            if [ "${{ inputs.pre_release }}" == "true" ]; then
+              gh release create $tag \
+                  --repo="$GITHUB_REPOSITORY" \
+                  --title="Pre-release for $tag" \
+                  --prerelease \
+                  --generate-notes
+            else
+              gh release create $tag \
+                  --repo="$GITHUB_REPOSITORY" \
+                  --title="Release for $tag" \
+                  --generate-notes

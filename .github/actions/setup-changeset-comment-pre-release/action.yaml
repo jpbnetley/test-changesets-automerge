@@ -10,8 +10,14 @@ inputs:
 runs:
   using: 'composite'
   steps:
+      - name: Get current release mode
+        id: current_release_mode
+        shell: bash
+        uses: ./.github/actions/is-pre-release
+
+
       - name: Prepare changeset pre-release
-        if: ${{ inputs.is_pre_release == 'true' }}
+        if: ${{ inputs.is_pre_release }} == 'true' && steps.current_release_mode.outputs.in_pre_release_mode == 'false'
         shell: bash
         run: |
           pnpm run version:pre-release
@@ -19,7 +25,7 @@ runs:
           git commit -m "chore: prepare pre-release"
 
       - name: Prepare changeset release
-        if: ${{ inputs.is_pre_release == 'false' }}
+        if: ${{ inputs.is_pre_release }} == 'false' && steps.current_release_mode.outputs.in_pre_release_mode == 'true'
         shell: bash
         run: |
           pnpm run version:pre-release:exit
