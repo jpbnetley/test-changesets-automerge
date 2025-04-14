@@ -32,7 +32,7 @@ jobs:
       - name: Check for changesets
         id: changesets
         uses: ./.github/actions/has-changesets
-      - run: echo "hasChanges=${{ steps.changesets.outputs.hasChanges }}" >> $GITHUB_OUTPUT
+      - run: echo "hasChanges=${{ steps.changesets.outputs.has_changes }}" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js ${{ inputs.node_version }}
         uses: actions/setup-node@v4
