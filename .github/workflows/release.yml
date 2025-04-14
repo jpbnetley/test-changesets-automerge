@@ -29,7 +29,7 @@ jobs:
 
       - name: Check for changesets
         id: changesets
-        uses: ./github/actions/has-changesets
+        uses: ./.github/actions/has-changesets
 
       - name: Setup Node.js ${{ env.node_version }}
         uses: actions/setup-node@v4
