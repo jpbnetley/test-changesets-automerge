@@ -13,9 +13,15 @@ runs:
       - name: Prepare changeset pre-release
         if: ${{ inputs.is_pre_release == 'true' }}
         shell: bash
-        run: pnpm run version:pre-release
+        run: |
+          pnpm run version:pre-release
+          git add .
+          git commit -m "chore: prepare pre-release"
 
       - name: Prepare changeset release
         if: ${{ inputs.is_pre_release == 'false' }}
         shell: bash
-        run: pnpm run version:pre-release:exit
+        run: |
+          pnpm run version:pre-release:exit
+          git add .
+          git commit -m "chore: exit pre-release"
