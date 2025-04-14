@@ -21,7 +21,7 @@ runs:
           echo "in_pre_release_mode: ${{ steps.current_release_mode.outputs.in_pre_release_mode }}"
 
       - name: Prepare changeset pre-release
-        if: ${{ inputs.is_pre_release }} == 'true' && ${{ steps.current_release_mode.outputs.in_pre_release_mode }} == 'false'
+        if: inputs.is_pre_release == 'true' && steps.current_release_mode.outputs.in_pre_release_mode == 'false'
         shell: bash
         run: |
           pnpm run version:pre-release
@@ -29,7 +29,7 @@ runs:
           git commit -m "chore: prepare pre-release"
 
       - name: Prepare changeset release
-        if: ${{ inputs.is_pre_release }} == 'false' && ${{ steps.current_release_mode.outputs.in_pre_release_mode }} == 'true'
+        if:  inputs.is_pre_release == 'false' && steps.current_release_mode.outputs.in_pre_release_mode == 'true'
         shell: bash
         run: |
           pnpm run version:pre-release:exit
