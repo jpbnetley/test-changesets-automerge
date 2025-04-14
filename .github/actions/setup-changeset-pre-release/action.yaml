@@ -1,0 +1,37 @@
+name: Setup changeset pre-release
+description: Check if there are changesets in the rep
+
+inputs: 
+  is_pre_release:
+    description: 'Is this a pre-release'
+    required: true
+    type: boolean
+
+runs:
+  using: 'composite'
+  steps:
+      - name: Get current release mode
+        id: current_release_mode
+        uses: ./.github/actions/is-pre-release
+
+      - name: debug
+        shell: bash
+        run: |
+          echo "is_pre_release: ${{ inputs.is_pre_release }}"
+          echo "in_pre_release_mode: ${{ steps.current_release_mode.outputs.in_pre_release_mode }}"
+
+      - name: Prepare changeset pre-release
+        if: inputs.is_pre_release == 'true' && steps.current_release_mode.outputs.in_pre_release_mode == 'false'
+        shell: bash
+        run: |
+          pnpm run version:pre-release
+          git add .
+          git commit -m "chore: prepare pre-release"
+
+      - name: Prepare changeset release
+        if:  inputs.is_pre_release == 'false' && steps.current_release_mode.outputs.in_pre_release_mode == 'true'
+        shell: bash
+        run: |
+          pnpm run version:pre-release:exit
+          git add .
+          git commit -m "chore: exit pre-release"

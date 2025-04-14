@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@jpbnetley/test-changesets-automerge": "0.0.25"
+  },
+  "changesets": []
+}

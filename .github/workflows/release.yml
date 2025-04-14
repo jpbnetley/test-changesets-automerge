@@ -1,19 +1,21 @@
 name: Release
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-
-concurrency: ${{ github.workflow }}-${{ github.ref }}
-
-env: 
-  node_version: 22
+  workflow_call:
+    inputs:
+      node_version:
+        description: Node.js version to use
+        required: false
+        type: string
+        default: '22'
+      pre_release:
+        description: Is this a pre-release
+        required: true
+        type: boolean
 
 jobs:
-  release:
-    name: Release
+  release-environment:
+    name: Release environment
     runs-on: ubuntu-latest
 
     permissions:
@@ -21,7 +23,7 @@ jobs:
       packages: write
 
     outputs:
-      hasChanges: ${{ steps.changesets.outputs.hasChanges }}
+      has_changes: ${{ steps.changesets.outputs.has_changes }}
 
     steps:
       - name: Checkout Repo
@@ -30,11 +32,12 @@ jobs:
       - name: Check for changesets
         id: changesets
         uses: ./.github/actions/has-changesets
+      - run: echo "has_changes=${{ steps.changesets.outputs.has_changes }}" >> $GITHUB_OUTPUT
 
-      - name: Setup Node.js ${{ env.node_version }}
+      - name: Setup Node.js ${{ inputs.node_version }}
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.node_version }}
+          node-version: ${{ inputs.node_version }}
           registry-url: 'https://npm.pkg.github.com'
 
       - uses: pnpm/action-setup@v4
@@ -47,9 +50,13 @@ jobs:
         run: pnpm build
 
       - name: Setup git user info
-        run: | 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"   
+        uses: ./.github/actions/git-user-info
+
+      - name: Prepare pre-release
+        if: steps.changesets.outputs.has_changes == 'true'
+        uses: ./.github/actions/setup-changeset-pre-release
+        with:
+          is_pre_release: ${{ inputs.pre_release }} == 'true'
 
       - name: Publish to GitHub Packages
         if: steps.changesets.outputs.has_changes == 'true'
@@ -62,11 +69,17 @@ jobs:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Prepare post pre-release
+        if: steps.changesets.outputs.has_changes == 'true'
+        uses: ./.github/actions/setup-changeset-pre-release
+        with:
+          is_pre_release: ${{ inputs.pre_release }} == 'false'
+
   release-notes:
       name: Release Notes
-      needs: release
+      needs: release-environment
       runs-on: ubuntu-latest
-      if: needs.release.outputs.hasChanges == 'true'
+      if: needs.release-environment.outputs.has_changes == 'true'
 
       permissions:
         contents: write
@@ -86,8 +99,17 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             tag: ${{ steps.tag.outputs.latest_tag }}
+            pre_release: ${{ inputs.pre_release }}
           run: |
-            gh release create $tag \
-                --repo="$GITHUB_REPOSITORY" \
-                --title="Release for $tag" \
-                --generate-notes
+            if [ "${{ inputs.pre_release }}" == "true" ]; then
+              gh release create $tag \
+                  --repo="$GITHUB_REPOSITORY" \
+                  --title="Pre-release for $tag" \
+                  --prerelease \
+                  --generate-notes
+            else
+              gh release create $tag \
+                  --repo="$GITHUB_REPOSITORY" \
+                  --title="Release for $tag" \
+                  --generate-notes
+            fi

@@ -10,11 +10,6 @@ inputs:
     description: Is there changes present
     required: true
 
-outputs:
-  has_changes:
-    description: 'If changesets has been found'
-    value: ${{ inputs.has_changes }}
-
 runs:
   using: 'composite'
   steps:

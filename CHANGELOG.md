@@ -1,5 +1,69 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.26-next.9
+
+### Patch Changes
+
+- b0e14d1: prepare for pre-release
+- 559529c: another pre-release patch
+
+## 0.0.26-next.8
+
+### Patch Changes
+
+- b0e14d1: prepare for pre-release
+- 559529c: another pre-release patch
+
+## 0.0.26-next.7
+
+### Patch Changes
+
+- b0e14d1: prepare for pre-release
+- 559529c: another pre-release patch
+
+## 0.0.26-next.6
+
+### Patch Changes
+
+- b0e14d1: prepare for pre-release
+- 559529c: another pre-release patch
+
+## 0.0.26-next.5
+
+### Patch Changes
+
+- b0e14d1: prepare for pre-release
+
+## 0.0.26-next.4
+
+### Patch Changes
+
+- b0e14d1: prepare for pre-release
+
+## 0.0.26-next.3
+
+### Patch Changes
+
+- b0e14d1: prepare for pre-release
+
+## 0.0.26-next.2
+
+### Patch Changes
+
+- b0e14d1: prepare for pre-release
+
+## 0.0.26-next.1
+
+### Patch Changes
+
+- b0e14d1: prepare for pre-release
+
+## 0.0.26-next.0
+
+### Patch Changes
+
+- b0e14d1: prepare for pre-release
+
 ## 0.0.25
 
 ### Patch Changes
