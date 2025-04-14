@@ -1,0 +1,23 @@
+name: Is Pre-release
+description: Check if release is in pre-release mode
+
+outputs:
+  in_pre_release_mode:
+    description: 'If the release is in pre-release mode'
+    value: ${{ steps.changesets.outputs.in_pre_release_mode }}
+
+runs:
+  using: 'composite'
+  steps:
+
+  - name: Check if release is in pre-release mode
+    id: changesets
+    shell: bash
+    run: |
+            if [ $(ls .changeset/pre.json | wc -l) -eq 1 ]; then
+              echo "No changesets found."
+              echo "in_pre_release_mode=false" >> $GITHUB_OUTPUT
+            else
+              echo "New changesets has been found."
+              echo "in_pre_release_mode=true" >> $GITHUB_OUTPUT
+            fi

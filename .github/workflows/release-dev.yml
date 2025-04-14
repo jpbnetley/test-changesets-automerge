@@ -1,0 +1,15 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    uses: ./.github/workflows/release.yml
+    with:
+      pre_release: true
