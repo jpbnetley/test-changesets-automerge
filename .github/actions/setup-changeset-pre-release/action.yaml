@@ -10,11 +10,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-      - name: log
-        shell: bash
-        run: |
-          pwd
-          ls
       - name: Get current release mode
         id: current_release_mode
         shell: bash
