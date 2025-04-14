@@ -23,7 +23,7 @@ jobs:
       packages: write
 
     outputs:
-      hasChanges: ${{ steps.changesets.outputs.hasChanges }}
+      has_changes: ${{ steps.changesets.outputs.has_changes }}
 
     steps:
       - name: Checkout Repo
@@ -32,7 +32,7 @@ jobs:
       - name: Check for changesets
         id: changesets
         uses: ./.github/actions/has-changesets
-      - run: echo "hasChanges=${{ steps.changesets.outputs.has_changes }}" >> $GITHUB_OUTPUT
+      - run: echo "has_changes=${{ steps.changesets.outputs.has_changes }}" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js ${{ inputs.node_version }}
         uses: actions/setup-node@v4
@@ -79,7 +79,7 @@ jobs:
       name: Release Notes
       needs: release-environment
       runs-on: ubuntu-latest
-      if: needs.release-environment.outputs.hasChanges == 'true'
+      if: needs.release-environment.outputs.has_changes == 'true'
 
       permissions:
         contents: write
