@@ -13,8 +13,7 @@ runs:
       - name: Get current release mode
         id: current_release_mode
         shell: bash
-        uses: ./.github/actions/is-pre-release
-
+        uses: ../is-pre-release
 
       - name: Prepare changeset pre-release
         if: ${{ inputs.is_pre_release }} == 'true' && steps.current_release_mode.outputs.in_pre_release_mode == 'false'
