@@ -14,8 +14,8 @@ on:
         type: boolean
 
 jobs:
-  release:
-    name: Release
+  release-environment:
+    name: Release environment
     runs-on: ubuntu-latest
 
     permissions:
@@ -76,9 +76,9 @@ jobs:
 
   release-notes:
       name: Release Notes
-      needs: release
+      needs: release-environment
       runs-on: ubuntu-latest
-      if: needs.release.outputs.hasChanges == 'true'
+      if: needs.release-environment.outputs.hasChanges == 'true'
 
       permissions:
         contents: write
