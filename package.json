@@ -1,6 +1,6 @@
 {
   "name": "@jpbnetley/test-changesets-automerge",
-  "version": "0.0.25",
+  "version": "0.0.26-next.0",
   "description": "test changesets for version management",
   "main": "dist/index.js",
   "files": [
@@ -12,8 +12,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "version:pre-release":"changeset pre enter next",
-    "version:pre-release:exit":"changeset pre exit",
+    "version:pre-release": "changeset pre enter next",
+    "version:pre-release:exit": "changeset pre exit",
     "version": "changeset",
     "version:bump": "changeset version",
     "ci:publish": "changeset publish",

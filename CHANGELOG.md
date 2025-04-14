@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.26-next.0
+
+### Patch Changes
+
+- b0e14d1: prepare for pre-release
+
 ## 0.0.25
 
 ### Patch Changes
