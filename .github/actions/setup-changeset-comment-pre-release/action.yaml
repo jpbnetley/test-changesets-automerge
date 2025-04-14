@@ -10,10 +10,13 @@ inputs:
 runs:
   using: 'composite'
   steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
       - name: Get current release mode
         id: current_release_mode
         shell: bash
-        uses: ../is-pre-release
+        uses: ./.github/actions/is-pre-release
 
       - name: Prepare changeset pre-release
         if: ${{ inputs.is_pre_release }} == 'true' && steps.current_release_mode.outputs.in_pre_release_mode == 'false'
