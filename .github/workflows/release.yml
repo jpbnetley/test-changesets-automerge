@@ -29,16 +29,7 @@ jobs:
 
       - name: Check for changesets
         id: changesets
-        # currently doesn't work correctly, see https://github.com/changesets/changesets/issues/1036
-        # old check: pnpm run version:hasChanges
-        run: |
-          if [ $(ls .changeset/*.md | wc -l) -eq 1 ]; then
-            echo "No changesets found."
-            echo "hasChanges=false" >> $GITHUB_OUTPUT
-          else
-            echo "New changesets has been found."
-            echo "hasChanges=true" >> $GITHUB_OUTPUT
-          fi
+        uses: ./github/actions/has-changesets
 
       - name: Setup Node.js ${{ env.node_version }}
         uses: actions/setup-node@v4
@@ -52,7 +43,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        if: steps.changesets.outputs.hasChanges == 'true'
+        if: steps.changesets.outputs.has_changes == 'true'
         run: pnpm build
 
       - name: Setup git user info
@@ -61,7 +52,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"   
 
       - name: Publish to GitHub Packages
-        if: steps.changesets.outputs.hasChanges == 'true'
+        if: steps.changesets.outputs.has_changes == 'true'
         run: |
           pnpm run version:bump
           pnpm ci:publish
