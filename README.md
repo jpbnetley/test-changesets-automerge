@@ -114,3 +114,5 @@ But this is not working as expected, as detailed [here](https://github.com/chang
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+## Testing pre-releases
