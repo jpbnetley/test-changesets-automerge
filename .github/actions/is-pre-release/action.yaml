@@ -15,9 +15,9 @@ runs:
     shell: bash
     run: |
             if [ $(ls .changeset/pre.json | wc -l) -eq 1 ]; then
-              echo "No changesets found."
-              echo "in_pre_release_mode=false" >> $GITHUB_OUTPUT
-            else
-              echo "New changesets has been found."
+              echo "Pre-release mode is enabled."
               echo "in_pre_release_mode=true" >> $GITHUB_OUTPUT
+            else
+              echo "Normal release mode (not in pre-release mode)."
+              echo "in_pre_release_mode=false" >> $GITHUB_OUTPUT
             fi
