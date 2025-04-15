@@ -56,6 +56,7 @@ jobs:
         uses: ./.github/actions/setup-changeset-pre-release
         with:
           is_pre_release: ${{ inputs.pre_release == true }}
+          branch_name: ${{ github.ref }}
 
       - name: Publish to GitHub Packages
         if: steps.changesets.outputs.has_changes == 'true'
