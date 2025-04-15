@@ -7,6 +7,11 @@ inputs:
     required: true
     type: boolean
 
+  branch_name:
+    description: 'Branch name to push changes to'
+    required: true
+    type: string
+
 runs:
   using: 'composite'
   steps:
@@ -27,6 +32,7 @@ runs:
           pnpm run version:pre-release
           git add .
           git commit -m "chore: prepare pre-release"
+          git push origin ${{ inputs.branch_name }}
 
       - name: Prepare changeset release
         if:  inputs.is_pre_release == 'false' && steps.current_release_mode.outputs.in_pre_release_mode == 'true'
@@ -35,3 +41,4 @@ runs:
           pnpm run version:pre-release:exit
           git add .
           git commit -m "chore: exit pre-release"
+          git push origin ${{ inputs.branch_name }}

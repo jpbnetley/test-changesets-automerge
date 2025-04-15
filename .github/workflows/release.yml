@@ -1,4 +1,4 @@
-name: Release
+name: Generic Release Job
 
 on:
   workflow_call:
@@ -53,10 +53,10 @@ jobs:
         uses: ./.github/actions/git-user-info
 
       - name: Prepare pre-release
-        if: steps.changesets.outputs.has_changes == 'true'
         uses: ./.github/actions/setup-changeset-pre-release
         with:
           is_pre_release: ${{ inputs.pre_release == true }}
+          branch_name: ${{ github.ref_name }}
 
       - name: Publish to GitHub Packages
         if: steps.changesets.outputs.has_changes == 'true'
@@ -69,11 +69,11 @@ jobs:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prepare post pre-release
-        if: steps.changesets.outputs.has_changes == 'true'
-        uses: ./.github/actions/setup-changeset-pre-release
-        with:
-          is_pre_release: ${{ inputs.pre_release == false }}
+      # - name: Prepare post pre-release
+      #   if: steps.changesets.outputs.has_changes == 'true'
+      #   uses: ./.github/actions/setup-changeset-pre-release
+      #   with:
+      #     is_pre_release: ${{ inputs.pre_release == false }} 
 
   release-notes:
       name: Release Notes

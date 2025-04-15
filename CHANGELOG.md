@@ -1,5 +1,29 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.1.0-next.3
+
+### Minor Changes
+
+- b94c3d8: changesets should switch modes based on correct branch
+
+## 0.1.0-next.2
+
+### Minor Changes
+
+- b94c3d8: changesets should switch modes based on correct branch
+
+## 0.1.0-next.1
+
+### Minor Changes
+
+- b94c3d8: changesets should switch modes based on correct branch
+
+## 0.1.0-next.0
+
+### Minor Changes
+
+- b94c3d8: changesets should switch modes based on correct branch
+
 ## 0.0.27
 
 ### Patch Changes
