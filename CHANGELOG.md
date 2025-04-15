@@ -1,5 +1,12 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.0.27-next.0
+
+### Patch Changes
+
+- 232d5f2: test conditon for release
+- cbb85bf: another pre-release patch
+
 ## 0.0.26
 
 ### Patch Changes
