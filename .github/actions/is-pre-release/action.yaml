@@ -14,10 +14,12 @@ runs:
     id: changesets
     shell: bash
     run: |
-            if [ $(ls .changeset/pre.json | wc -l) -eq 1 ]; then
-              echo "Pre-release mode is enabled."
-              echo "in_pre_release_mode=true" >> $GITHUB_OUTPUT
+            if [[ -f .changeset/pre.json ]]; then
+              if [[ "$(jq -r '.mode' .changeset/pre.json)" == "pre" ]]; then
+                echo "Pre-release mode is enabled."
+              else
+                echo "Pre-release mode is disabled."
+              fi
             else
               echo "Normal release mode (not in pre-release mode)."
-              echo "in_pre_release_mode=false" >> $GITHUB_OUTPUT
             fi
