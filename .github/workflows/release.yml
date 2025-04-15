@@ -59,7 +59,7 @@ jobs:
           is_pre_release: ${{ inputs.pre_release == true }}
 
       - name: Publish to GitHub Packages
-        if: steps.changesets.outputs.has_changes == true
+        if: steps.changesets.outputs.has_changes == 'true'
         run: |
           pnpm run version:bump
           pnpm ci:publish
