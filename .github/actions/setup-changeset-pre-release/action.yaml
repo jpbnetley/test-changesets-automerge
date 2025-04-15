@@ -12,6 +12,11 @@ inputs:
     required: true
     type: string
 
+  GITHUB_TOKEN:
+    description: 'The github token to use for pushing changes'
+    required: true
+    type: string
+
 runs:
   using: 'composite'
   steps:
@@ -34,7 +39,7 @@ runs:
           git commit -m "chore: prepare pre-release"
           git push ${{ inputs.branch_name }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
       - name: Prepare changeset release
         if:  inputs.is_pre_release == 'false' && steps.current_release_mode.outputs.in_pre_release_mode == 'true'
@@ -45,4 +50,4 @@ runs:
           git commit -m "chore: exit pre-release"
           git push ${{ inputs.branch_name }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
