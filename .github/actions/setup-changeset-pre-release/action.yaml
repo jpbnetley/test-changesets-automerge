@@ -32,8 +32,10 @@ runs:
           pnpm run version:pre-release
           git add .
           git commit -m "chore: prepare pre-release"
-          git push ${{ inputs.branch_name }} 
-          
+          git push ${{ inputs.branch_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Prepare changeset release
         if:  inputs.is_pre_release == 'false' && steps.current_release_mode.outputs.in_pre_release_mode == 'true'
         shell: bash
@@ -41,4 +43,6 @@ runs:
           pnpm run version:pre-release:exit
           git add .
           git commit -m "chore: exit pre-release"
-          git push ${{ inputs.branch_name }} 
+          git push ${{ inputs.branch_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
