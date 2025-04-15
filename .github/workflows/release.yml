@@ -1,4 +1,4 @@
-name: Release
+name: Generic Release Job
 
 on:
   workflow_call:
