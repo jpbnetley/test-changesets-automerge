@@ -1,5 +1,11 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.1.0
+
+### Patch Changes
+
+- a552013: another changeset
+
 ## 0.1.0-next.5
 
 ### Patch Changes
