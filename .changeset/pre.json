@@ -1,8 +1,8 @@
 {
-  "mode": "exit",
+  "mode": "pre",
   "tag": "next",
   "initialVersions": {
-    "@jpbnetley/test-changesets-automerge": "0.0.27"
+    "@jpbnetley/test-changesets-automerge": "0.1.0-next.4"
   },
   "changesets": []
 }
