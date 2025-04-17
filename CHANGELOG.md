@@ -1,5 +1,13 @@
 # @jpbnetley/test-changesets-automerge
 
+## 0.1.0-next.7
+
+### Patch Changes
+
+- 11aa02a: update changesets cli
+- a552013: another changeset
+- 9c2a191: update changesets cli to v2.29.2
+
 ## 0.1.0-next.6
 
 ### Patch Changes
