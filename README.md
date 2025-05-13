@@ -20,10 +20,10 @@ project settings -> actions -> General -> Workflow permissions -> Choose whether
 `npx changeset`
 
 # Enable release on merge
-There here are some options:
-[ ] Use the [changesets action](https://github.com/changesets/action) provided by changesets, and then set up automerge once the release should be merged.
-[ ] use auto-publish github [action](https://github.com/JamilOmar/autopublish-changesets-action)
-[X] Build a custom job
+There here are some options:  
+- [ ] Use the [changesets action](https://github.com/changesets/action) provided by changesets, and then set up automerge once the release should be merged.  
+- [ ] use auto-publish github [action](https://github.com/JamilOmar/autopublish-changesets-action)  
+- [X] Build a custom job  
 
 This repo tried a few implantations to get auto release working, and ended up using the *`Build a custom job`* option.
 
